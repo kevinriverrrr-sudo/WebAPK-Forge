@@ -8,14 +8,14 @@
   },
   "scripts": {
     "start": "node bin/webapk.js",
-    "setup": "node src/setup.js",
-    "postinstall": "node scripts/postinstall.js"
+    "setup": "node src/setup.js"
   },
   "files": [
-    "bin/",
-    "src/",
-    "scripts/",
-    "tools/",
+    "bin/webapk.js",
+    "src/index.js",
+    "src/setup.js",
+    "src/builder.js",
+    "src/templates/",
     "LICENSE",
     "README.md"
   ],
