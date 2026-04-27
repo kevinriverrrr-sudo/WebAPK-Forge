@@ -4,77 +4,66 @@
 
 **Professional CLI Android WebView APK Builder for Termux**
 
-Собирайте Android APK приложения из любого URL прямо на телефоне!
-Build Android APK apps from any website URL directly on your device!
+Build Android WebView APK apps from any website URL — directly on your phone!
 
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Node.js](https://img.shields.io/badge/Node.js-%3E%3D14-green.svg)](https://nodejs.org)
 [![Platform](https://img.shields.io/badge/Platform-Termux%20%7C%20Android-orange.svg)]()
-
-[English](#english) | [Русский](#русский)
+[![No SDK](https://img.shields.io/badge/No%20Android%20SDK-required-red.svg)]()
 
 </div>
 
 ---
 
-## Русский
+## Установка (через npm)
 
-### Что это?
-
-**WebAPK Forge** — это CLI-утилита для Termux, которая позволяет собирать полноценные Android APK приложения с WebView из любого URL-адреса прямо на вашем Android-устройстве. **Никакого Android SDK не требуется!**
-
-### Возможности
-
-- 🚀 **Сборка APK из URL** — введите ссылку на сайт и получите готовый APK
-- 📱 **Работает в Termux** — полный билд без ПК, без Android Studio, без SDK
-- 🔧 **Без SDK** — используется минималистичный подход с aapt2 + javac + d8
-- 🎨 **Fullscreen WebView** — приложения в полноэкранном режиме с поддержкой JavaScript
-- 🔒 **HTTPS + HTTP** — поддержка безопасных и небезопасных соединений
-- ⚡ **Быстрая сборка** — среднее время сборки 5-15 секунд
-- 📦 **npm установка** — одна команда для установки
-
-### Установка
-
-#### Способ 1: Быстрая установка (рекомендуется)
+### Шаг 1 — Установи Termux-зависимости
 
 ```bash
-# Склонируйте репозиторий
-git clone https://github.com/kevinriverrrr-sudo/WebAPK-Forge.git
-cd WebAPK-Forge
-
-# Запустите установку (установит все зависимости Termux)
-bash scripts/setup-termux.sh
+pkg update -y
+pkg install -y openjdk-17 aapt2 nodejs
 ```
 
-#### Способ 2: Через npm (если опубликовано)
+### Шаг 2 — Установи WebAPK Forge
 
 ```bash
-npm install -g webapk-forge
-webapk
+npm install -g kevinriverrrr-sudo/WebAPK-Forge
 ```
 
-#### Способ 3: Ручная установка
-
-```bash
-# 1. Установите Termux-пакеты
-pkg update && pkg upgrade -y
-pkg install -y openjdk-17 aapt2 wget unzip zip nodejs
-
-# 2. Установите CLI
-git clone https://github.com/kevinriverrrr-sudo/WebAPK-Forge.git
-cd webapk-forge
-npm install -g .
-```
-
-### Использование
-
-Запустите CLI:
+### Шаг 3 — Запусти
 
 ```bash
 webapk
 ```
 
-Вы увидите меню:
+При первом запуске выбери **[2] Setup** — он скачает r8.jar и создаст android.jar автоматически.
+
+**Всё!** Теперь выбирай **[1] Build APK**, вводи URL сайта и получай готовый APK файл.
+
+---
+
+## English
+
+### Install (via npm)
+
+```bash
+# 1. Termux dependencies
+pkg update -y && pkg install -y openjdk-17 aapt2 nodejs
+
+# 2. Install WebAPK Forge
+npm install -g kevinriverrrr-sudo/WebAPK-Forge
+
+# 3. Run
+webapk
+```
+
+First run: select **[2] Setup** to download build tools (r8.jar, android.jar, keystore).
+
+Then select **[1] Build APK**, enter any URL, and get a signed APK file.
+
+---
+
+## CLI Menu
 
 ```
   ╔══════════════════════════════════════════════╗
@@ -83,104 +72,80 @@ webapk
   ║   Powered by Termux                         ║
   ╚══════════════════════════════════════════════╝
 
-  МЕНЮ:
-
-  [1] 📦 Build APK       — Собрать WebView APK из URL
-  [2] ⚙️ Setup            — Настройка окружения Termux
-  [0] 🚪 Exit            — Выход из программы
+  [1] 📦 Build APK   — Собрать WebView APK из URL
+  [2] ⚙️ Setup        — Настройка окружения Termux
+  [0] 🚪 Exit         — Выход
 ```
-
-### Пайплайн сборки
-
-```
-URL → AndroidManifest + MainActivity.java
-  → aapt2 compile (ресурсы)
-  → aapt2 link (R.java)
-  → javac (Java → .class)
-  → d8/r8 (.class → classes.dex)
-  → aapt2 add (DEX → APK)
-  → jarsigner (подпись APK)
-  → Готовый APK файл!
-```
-
-### Требования
-
-- Android 7.0+ (API 21+)
-- Termux (последняя версия)
-- ~200 MB свободного места
-
-### Зависимости Termux
-
-| Пакет | Назначение |
-|-------|-----------|
-| `openjdk-17` | Java компилятор (javac) |
-| `aapt2` | Android Asset Packaging Tool |
-| `wget` | Скачивание инструментов |
-| `zip` / `unzip` | Работа с архивами |
-| `nodejs` | Запуск CLI |
 
 ---
 
-## English
-
-### What is it?
-
-**WebAPK Forge** is a CLI tool for Termux that builds full Android WebView APK applications from any website URL, directly on your Android device. **No Android SDK required!**
-
-### Features
-
-- 🚀 **Build APK from URL** — enter a website link and get a ready APK
-- 📱 **Works in Termux** — full build without PC, Android Studio, or SDK
-- 🔧 **No SDK** — uses a minimal approach with aapt2 + javac + d8
-- 🎨 **Fullscreen WebView** — apps in fullscreen mode with JavaScript support
-- 🔒 **HTTPS + HTTP** — supports both secure and insecure connections
-- ⚡ **Fast builds** — average build time 5-15 seconds
-- 📦 **npm install** — single command to install
-
-### Installation
-
-```bash
-# Clone the repository
-git clone https://github.com/kevinriverrrr-sudo/WebAPK-Forge.git
-cd WebAPK-Forge
-
-# Run setup (installs all Termux dependencies)
-bash scripts/setup-termux.sh
-```
-
-### Usage
-
-```bash
-webapk
-```
-
-### Build Pipeline
+## How It Works (No Android SDK!)
 
 ```
 URL → AndroidManifest + MainActivity.java
-  → aapt2 compile (resources)
-  → aapt2 link (R.java)
-  → javac (Java → .class)
-  → d8/r8 (.class → classes.dex)
-  → aapt2 add (DEX → APK)
-  → jarsigner (APK signing)
-  → Ready APK file!
+  → aapt2 compile   (resources → compiled_res.zip)
+  → aapt2 link      (→ resources.apk + R.java)
+  → javac           (Java sources → .class files)
+  → d8 / r8         (.class → classes.dex)
+  → aapt2 add       (DEX packed into APK)
+  → jarsigner       (debug signature)
+  → Ready .apk file!
 ```
 
-### Requirements
+**Instead of Android SDK (~5 GB), we use:**
+| Tool | Size | Source |
+|------|------|--------|
+| aapt2 | ~3 MB | `pkg install aapt2` |
+| javac | ~50 MB | `pkg install openjdk-17` |
+| r8.jar (d8) | ~15 MB | Auto-downloaded to `~/.webapk-forge/` |
+| android.jar | ~20 KB | Auto-generated from stubs |
+| debug.keystore | ~2 KB | Auto-generated |
+
+---
+
+## Features
+
+- 🚀 **Build APK from any URL** — enter a link, get a signed APK
+- 📱 **Works in Termux** — no PC, no Android Studio, no SDK
+- 🔧 **One-command install** — `npm install -g` and done
+- 🎨 **Fullscreen WebView** — immersive mode, JavaScript enabled
+- 🔒 **HTTP + HTTPS** — network security config included
+- ⚡ **Fast builds** — average 5-15 seconds
+- 💾 **Persistent tools** — downloaded once to `~/.webapk-forge/`
+
+---
+
+## Requirements
 
 - Android 7.0+ (API 21+)
-- Termux (latest version)
+- Termux (latest)
+- Node.js >= 14
 - ~200 MB free space
 
 ---
 
-## 📄 License
+## Directory Layout
 
-MIT License — see [LICENSE](LICENSE) for details.
+After `npm install -g`, tools are stored in your home directory:
+
+```
+~/.webapk-forge/
+  └── tools/
+        ├── r8.jar          ← d8 compiler (auto-downloaded)
+        ├── android.jar     ← Android API stubs (auto-generated)
+        └── debug.keystore  ← APK signing key (auto-generated)
+```
+
+These persist across reinstalls — you never download them twice.
+
+---
+
+## License
+
+MIT — see [LICENSE](LICENSE)
 
 ---
 
 <div align="center">
-  Made with ❤️ for the Termux community
+  Made for the Termux community
 </div>

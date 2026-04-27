@@ -16,7 +16,7 @@ const { execSync, spawnSync } = require('child_process');
 const path = require('path');
 const fs = require('fs');
 const os = require('os');
-const { getToolsDir, run, getTermuxPrefix } = require('./setup');
+const { getToolsDir, run, getTermuxPrefix, getPackageRoot } = require('./setup');
 
 // ─── ANSI Colors ─────────────────────────────────────────────────────────────
 
@@ -40,7 +40,9 @@ function phase(title) {
 // ─── Template loaders ────────────────────────────────────────────────────────
 
 function loadTemplate(name) {
-    return fs.readFileSync(path.join(__dirname, 'templates', name), 'utf-8');
+    // Templates live in the npm package directory (read-only after install)
+    const pkgRoot = getPackageRoot();
+    return fs.readFileSync(path.join(pkgRoot, 'src', 'templates', name), 'utf-8');
 }
 
 // ─── File generators ─────────────────────────────────────────────────────────

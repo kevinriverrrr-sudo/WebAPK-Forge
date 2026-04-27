@@ -1,7 +1,7 @@
 {
   "name": "webapk-forge",
   "version": "1.0.0",
-  "description": "Professional CLI Android WebView APK Builder for Termux. Build APK apps from any website URL directly on your Android device.",
+  "description": "Professional CLI Android WebView APK Builder for Termux. Build APK apps from any website URL directly on your Android device. No Android SDK required.",
   "main": "src/index.js",
   "bin": {
     "webapk": "bin/webapk.js"
@@ -9,19 +9,29 @@
   "scripts": {
     "start": "node bin/webapk.js",
     "setup": "node src/setup.js",
-    "postinstall": "node src/setup.js --check"
+    "postinstall": "node scripts/postinstall.js"
   },
+  "files": [
+    "bin/",
+    "src/",
+    "scripts/",
+    "tools/",
+    "LICENSE",
+    "README.md"
+  ],
   "keywords": [
     "android",
     "apk",
-    "builder",
-    "webview",
-    "termux",
-    "cli",
-    "mobile",
     "apk-builder",
-    "webview-app",
-    "no-sdk"
+    "builder",
+    "cli",
+    "java",
+    "kotlin",
+    "mobile",
+    "no-sdk",
+    "termux",
+    "webview",
+    "webview-app"
   ],
   "author": "WebAPK Forge Team",
   "license": "MIT",
