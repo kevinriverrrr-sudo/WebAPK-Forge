@@ -21,7 +21,7 @@ Build Android WebView APK apps from any website URL — directly on your phone!
 
 ```bash
 pkg update -y
-pkg install -y openjdk-17 aapt2 nodejs
+pkg install -y openjdk-17 aapt2 nodejs git
 ```
 
 ### Шаг 2 — Установи WebAPK Forge
@@ -48,7 +48,7 @@ webapk
 
 ```bash
 # 1. Termux dependencies
-pkg update -y && pkg install -y openjdk-17 aapt2 nodejs
+pkg update -y && pkg install -y openjdk-17 aapt2 nodejs git
 
 # 2. Install WebAPK Forge
 npm install -g kevinriverrrr-sudo/WebAPK-Forge
@@ -120,6 +120,7 @@ URL → AndroidManifest + MainActivity.java
 - Android 7.0+ (API 21+)
 - Termux (latest)
 - Node.js >= 14
+- Git (`pkg install git`)
 - ~200 MB free space
 
 ---
